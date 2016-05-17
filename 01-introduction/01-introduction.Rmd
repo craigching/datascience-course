@@ -35,10 +35,26 @@ knitr::include_graphics("images/CoverII_small.jpg")
 * Download and install RStudio
     + https://www.rstudio.com/products/rstudio/download/
 
+## Why R?
+
+* Because ISLR!
+* I believe it's the best environment for learning the concepts of machine learning
+  + R + RStudio are free and open source and easy to use
+* Concepts can be *directly* applied to other environments, particularly Python
+* We're all programmers and my experience tells me you won't have a problem with learning R!
+
+## Modern R
+
+* Hadley Wickham, "The Hadleyverse"
+    + ggplot2
+    + dplyr
+    + tidyr
+
 ## Learning R
 
 * Data Computing
     + http://data-computing.org
+* Covers modern R!
 
 ```{r, out.width = 300, fig.retina = NULL}
 knitr::include_graphics("images/front-cover.png")
@@ -53,12 +69,23 @@ knitr::include_graphics("images/front-cover.png")
 knitr::include_graphics("images/RinActionCover.jpg")
 ```
 
-## Modern R
+## Goals of the Data Science Meetup
 
-* Hadley Wickham, "The Hadleyverse"
-    + ggplot2
-    + dplyr
-    + tidyr
+* Have fun!
+    + Forum for taking risks
+* Learn about the topic of machine learning
+* ISLR is not the end
+
+## Structure of the Data Science Meetup
+
+* Structured sessions
+    + Interaction encouraged
+* Presentations availble on BMC github
+    + Available on BMC github
+* Regular sessions and will be recorded
+* Labs
+    + Volunteer to present?
+* Open ended
 
 ## Introduction to Statistical Learning
 
