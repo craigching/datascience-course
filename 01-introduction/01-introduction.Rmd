@@ -1,0 +1,104 @@
+---
+title: "01-Data Science Introduction"
+author: "Craig Ching"
+date: "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
+output: ioslides_presentation
+css: css/intro.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Books {#covers}
+
+```{r, out.width = 300, fig.retina = NULL}
+knitr::include_graphics("images/ISL Cover 2.jpg")
+knitr::include_graphics("images/CoverII_small.jpg")
+```
+
+## Books
+
+* An Introduction to Statistical Learning with Applications in R (ISLR)
+    + Focused on applying statistical learning
+    + Our primary book for the meetups
+    + Available at http://www-bcf.usc.edu/~gareth/ISL/
+* The Elements of Statistical Learning (ESL)
+    + Provides the theory
+    + We may use this for some deeper dives
+    + Available at http://statweb.stanford.edu/~tibs/ElemStatLearn/
+    
+## Getting and Using R
+
+* Download and install R
+    + https://www.cran.r-project.org
+* Download and install RStudio
+    + https://www.rstudio.com/products/rstudio/download/
+
+## Learning R
+
+* Data Computing
+    + http://data-computing.org
+
+```{r, out.width = 300, fig.retina = NULL}
+knitr::include_graphics("images/front-cover.png")
+```
+
+## Learning R
+
+* R in Action
+    + https://www.manning.com/books/r-in-action-second-edition
+
+```{r, out.width = 300, fig.retina = NULL}
+knitr::include_graphics("images/RinActionCover.jpg")
+```
+
+## Modern R
+
+* Hadley Wickham, "The Hadleyverse"
+    + ggplot2
+    + dplyr
+    + tidyr
+
+## Introduction to Statistical Learning
+
+```{r, out.width = 600, fig.retina = NULL}
+knitr::include_graphics("images/plots.png")
+```
+
+## Exploring Data
+
+* Quantitative/continuous values
+    + Age
+    + Wage
+* Qualitative/categorical values
+    + Education level
+    + Stock movement (up, down)
+    + Low, medium, high (ordered categorical)
+
+## History of Statistical Learning
+
+* Method of Least Squares
+    + Legendre, Gauss beginning 19th century
+    + Basis of linear regression
+    + Predict quantitative values
+* Linear Discriminant Analysis
+    + Fisher, 1936
+    + Predict qualitative values
+* Logistic Regression
+    + Various, 1940's
+    + Alternative to LDA
+* Generalized Linear Models
+    + Nelder and Wedderburn, early 1970's
+
+## ISLR Premises
+
+* Many statistical learning methods are relevant and useful in a wide
+range of academic and non-academic disciplines, beyond just the statistical
+sciences
+* Statistical learning should not be viewed as a series of black boxes
+* While it is important to know what job is performed by each cog, it
+is not necessary to have the skills to construct the machine inside the
+box!
+* We presume that the reader is interested in applying statistical learning
+methods to real-world problems
