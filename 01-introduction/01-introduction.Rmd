@@ -81,7 +81,7 @@ knitr::include_graphics("images/RinActionCover.jpg")
 * Structured sessions
     + Interaction encouraged
 * Presentations availble on BMC github
-    + Available on BMC github
+    + Available on BMC github https://github.bmc.com/cching/bmc-datascience
 * Regular sessions and will be recorded
 * Labs
     + Volunteer to present?
