@@ -85,6 +85,17 @@ $\hat{\beta_1} = \frac{\sum_{i = 1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i =
 
 $\hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x_i}$
 
+## Least Squares Minimization
+
+```{r, out.width = 800, fig.retina = NULL}
+knitr::include_graphics("images/least-squares-minimization.png")
+```
+
+## Linear Regression for Advertising Data
+
+* $sales \approx 7.03 + 0.0475TV$
+* Interpretation: "An additional $1,000 spent on TV advertising is associated with selling approximately 47.5 additional units of the product."
+
 ## Least Squares Illustrated
 
 ```{r, out.width = 600, fig.retina = NULL}
@@ -93,19 +104,84 @@ knitr::include_graphics("images/least-squares.png")
 
 $\hat{y} = 7.03 + 0.0475x$
 
-## R Demonstration
+## The Population Regression Line
+
+```{r, out.width = '400', fig.retina = NULL}
+knitr::include_graphics("./images/pop-regression-line.png")
+```
+
+True model based on $f(X) = 2 + 3X$, red line represents true relationship, dark blue line is the least squares estimate, light blue lines are least squares lines from different data sets
+
+* Least squares lines are, on average, close to the population regression line
+* Example of Variance in "Bias Variance Tradeoff"
 
 ## Assessing Accuracy of the Coefficient Estimates
 
+* Average amount that the coefficients $\hat{\beta_0}$ and $\hat{\beta_1}$ differ from the true coefficients $\beta_0$ and $\beta_1$
+
+* Similar to computing standard errors for point estimates of $\mu$, the point estimate for the population mean
+
+$SE(\hat{\beta_0})^2 = \sigma^2\Big[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i = 1}^{n}(x_i - \bar{x})^2}\Big]$
+
+$SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \bar{x})^2}$
+
+## Confidence Intervals for Coefficient Estimates
+
+$\beta_1 \pm 2 * SE(\hat{\beta_1})$
+
+$\beta_0 \pm 2 * SE(\hat{\beta_0})$
+
+$[\hat{\beta_1} - 2 * SE(\hat{\beta_1}), \hat{\beta_1} + 2 * SE(\hat{\beta_1})]$
+
+"In the case of the advertising data, the 95% confidence interval for $\beta_0$ is [6.130, 7.935] and the 95% confidence interval for $\beta_1$ is [0.042, 0.053]. Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,940 units. Furthermore, for each $1,000 increase in television advertising, there will be an average increase in sales of between 42 and 53 units."
+
+## Hypothesis Tests for Cofficient Estimates
+
+$H_0 :$ There is no relationship between $X$ and $Y$
+
+$H_a :$ There is some relationship between $X$ and $Y$
+
+Mathematically:
+
+$H_0 : \beta_1 = 0$
+
+$H_a : \beta_1 \neq 0$
+
+## The *t* Statistic for the Coefficient Estimates
+
+* Measures the number of standard deviations that $\hat{\beta_1}$ is away from 0
+* Probability of observing any value equal to |$t$| or larger, assuming $\beta_1 = 0$, *p-value*
+
+$t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})}$
+
 ## Assessing Model Accuracy
 
-## $R^2$ Statistic
+* Residual Standard Error (RSE)
+    + Estimates the standard deviation of $\epsilon$
+    + Average amount that the response deviates from the true regression line
+    + Hard to evaluate since it is measured in the same units as $Y$
 
+* $R^2$ Statistic
+    + The proportion of variance explained, always between 0 and 1
+    + Independent of the scale of $Y$
+    + Squared correlation and the $R^2$ statistic are identical
+    + $R^2$ is better than correlation in multiple linear regression
 
+## RSE and $R^2$ Computations
 
+$RSE = \sqrt{\frac{1}{n - 2} RSS}$
 
+$RSS = \sum_{i = 1}^{n}(y_i - \hat{y_i})^2$
 
+$R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}$
 
+$TSS = \sum_(y_i - \bar{y})^2$
 
+* RSE is *residual standard error*
+* RSS is *residual sum of squares*
+* TSS is *total sum of squares*
 
+## R Demonstration
 
+* Advertising data set
+* mtcars data set
