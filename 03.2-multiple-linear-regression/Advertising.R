@@ -18,3 +18,6 @@ fit3$sigma
 fit1$adj.r.squared
 fit2$adj.r.squared
 fit3$adj.r.squared
+
+advertising$X <- NULL
+cor(advertising)

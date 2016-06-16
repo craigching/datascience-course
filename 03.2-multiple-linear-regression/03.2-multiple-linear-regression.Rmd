@@ -141,7 +141,7 @@ $H_a$ : at least one $\beta_j$ is non-zero
 ## Model Selection
 
 * Forward selection
-    + Start with null model and add in predictors that result in lowest RSS
+    + Start with null model and add in predictors that result in lowest RSS (really!?)
     + Can always be used
 * Backward selection
     + Start with all variables and remove based on non-significant p-values
