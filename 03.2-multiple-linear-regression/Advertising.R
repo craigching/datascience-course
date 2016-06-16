@@ -1,3 +1,14 @@
+# Show that for single regression, R^2 statstic is the
+# same as correlation squared
+
+advertising <- read.csv("Advertising.csv")
+advertising$X <- NULL
+cm <- cor(advertising)
+r.squared <- cm[1,4]^2
+fit <- lm(Sales ~ TV, data = advertising)
+summary(fit)$r.squared
+r.squared
+
 # Fit the advertising data to three models and look at
 # RSE, R^2, and Ajusted R^2
 
