@@ -16,8 +16,12 @@ fit <- lm(Sales ~ TV + Radio + Newspaper, data=advertising)
 
 ## Recap
 
-* OLS
-* RSS
+* Simple linear regression
+    + Predict quantitative responses from a single predictor variable
+* Residuals
+    + Difference between estimated and observed response given a predictor
+* Least Squares and RSS
+    + Least squares *minimizes* RSS to find a line of best fit
 * Goodness of fit
     + RSE and $R^2$
 
@@ -131,6 +135,7 @@ $H_a$ : at least one $\beta_j$ is non-zero
     + Covered more in Chapter 6
 * Ideally, we'd like to try a bunch of different models
     + Different statistics can be used to judge model quality
+    + Mallow's $C_p$, AIC, BIC, Adjusted $R^2$
 * For $p$ predictors, there are $2^p$ models!
 
 ## Model Selection
@@ -144,9 +149,22 @@ $H_a$ : at least one $\beta_j$ is non-zero
 * Mixed selection
     + Start with forward selection, remove any p-values that are non-significant
 
-## Adjusted $R^2$
-
 ## Model Fit
+
+* Two measures of model fit
+    + $R^2$
+    + RSE
+* $R^2$ will always *increase* when variables are added to the model
+    + Use *Adjusted $R^2$ instead
+* Sometimes it can be useful to plot the data
+
+## Advertising Plot {.smaller}
+
+```{r, out.width = 400, fig.retina = NULL}
+knitr::include_graphics("images/tv-radio-vs-sales.png")
+```
+
+"In particular, the linear model seems to overestimate sales for instances in which most of the advertising money was spent exclusively on either TV or radio. It underestimates sales for instances where the budget was split between the two media. This pronounced non-linear pattern cannot be modeled accurately using linear regression. It suggests a synergy or interaction effect between the advertising media, whereby combining the media together results in a bigger boost to sales than using any single medium."
 
 ## Predictions
 
@@ -164,8 +182,3 @@ $H_a$ : at least one $\beta_j$ is non-zero
     + Always wider than confidence intervals
     + Incorporate reducible and irreducible error
     + Quantify the uncertainty surrounding sales for a *particular* city
-
-
-
-
-
