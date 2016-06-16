@@ -182,3 +182,9 @@ knitr::include_graphics("images/tv-radio-vs-sales.png")
     + Always wider than confidence intervals
     + Incorporate reducible and irreducible error
     + Quantify the uncertainty surrounding sales for a *particular* city
+
+## R Demonstration
+
+* Implementation of least squares
+* Comparing goodness of fit statistics for Advertising data
+* MLR with mtcars data and model selection
