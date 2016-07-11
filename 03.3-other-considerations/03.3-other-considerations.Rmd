@@ -1,0 +1,229 @@
+---
+title: "03.3 Other Considerations in the Regression Model"
+author: "Craig Ching"
+date: "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(scales)
+library(broom)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+credit <- read.csv("Credit.csv")
+```
+
+## Recap
+
+## Qualitative Predictors
+
+* Thus far our variables have been *quantitative*
+* But often some predictors are *qualitative*
+    + Gender (male, female)
+    + Ethnicity (African American, Asian, Caucasian)
+* The response variable is still *quantitative*
+    + This is regression, not classification
+* Example: the **Credit** data set
+
+## Qualitative Predictors with Only Two Levels
+
+* Create a *dummy variable* that can take on two possible vaues
+
+$x_i=
+\begin{cases}
+1 & \text{if } i\text{th person is female}\\
+0 & \text{if } i\text{th person is male}\\
+\end{cases}$
+
+$y_i = \beta_0 + \beta_1x_i + \epsilon_i = 
+\begin{cases}
+\beta_0 + \beta_1 + \epsilon_i & \text{if } i\text{th person is female}\\
+\beta_0 + \epsilon_i & \text{if } i\text{th person is male}\\
+\end{cases}$
+
+* $\beta_0$ is the average credit card balance among males
+* $\beta_0 + \beta_1$ is the average credit card balance among females
+* $\beta_1$ is the average difference in credit card balance between females and males
+
+## Interpretation of the Balance ~ Gender Model {.smaller}
+
+```{r gender}
+fit <- lm(Balance ~ Gender, data = credit)
+kable(summary(fit)$coeff, digits = 2)
+```
+
+* Average credit card debt for males is $509.80
+* Females are estimated to carry an additional $19.73 in credit card debt
+* What can we say about the p-value for the female variable?
+
+## Choosing the values for dummy variables
+
+* The chosen values are arbitrary and have no effect on the regression fit
+* Does alter the interpretation of the coefficients
+* See the book for further examples
+
+## Qualitative Predictors with More than Two Levels {.smaller}
+
+* A single dummy varible is not sufficient, so we create more dummy variables
+
+$x_{i1}=
+\begin{cases}
+1 & \text{if } i\text{th person is Asian}\\
+0 & \text{if } i\text{th person is not Asian}\\
+\end{cases}$
+
+$x_{i2}=
+\begin{cases}
+1 & \text{if } i\text{th person is Caucasian}\\
+0 & \text{if } i\text{th person is not Caucasian}\\
+\end{cases}$
+
+$y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \epsilon_i = 
+\begin{cases}
+\beta_0 + \beta_1 + \epsilon_i & \text{if } i\text{th person is Asian}\\
+\beta_0 + \beta_2 + \epsilon_i & \text{if } i\text{th person is Caucasian}\\
+\beta_0 + \epsilon_i & \text{if } i\text{th person is African American}\\
+\end{cases}$
+
+* $\beta_0$ is the average credit card balance for African Americans
+* $\beta_1$ is the difference in average credit card balance between Asians and African Americans
+* $\beta_2$ is the difference in average credit card balance between Caucasians and African Americans
+
+
+## Interpretation of the Balance ~ Ethnicity Model {.smaller}
+
+```{r ethnicity}
+fit <- lm(Balance ~ Ethnicity, data = credit)
+kable(summary(fit)$coeff, digits = 2)
+```
+
+* There will always be one fewer dummy variable than number of levels
+* The level with no dummy variable - African Americans in this example - is known as the *baseline*
+* The average balance for African Americans, the baseline, is $531.00
+* The average balance for Asians is $18.69 less than for African Americans
+* The average balance for Caucasians is $12.50 less than for African Americans
+* Again, what can we say about the p-values for the dummy variables?
+
+## Extensions of the Linear Model
+
+* The linear model is interpretable and works well on many real-world problems
+* However, there are several highly restrictive assumptions that are violated in practice
+* Two of the most important assumptions state that the relationship between predictors and response are *additive* and *linear*
+    + Additive means that the changes in predictor $X_j$ on the response $Y$ is independent of the values of other predictors
+    + Linear states that the change in the response $Y$ due to a one-unit change in $X_j$ is constant regardless of $X_j$
+
+## Removing the Additive Assumption
+
+* In the sales example, we state that the average effect on **sales** of a one-unit increase in **TV** is always $\beta_1$ regardless of the amount spent on **radio**
+* What if spending money on **radio** actually increases **TV** advertising?
+    + This is called a *synergy* or *interaction* effect
+    + Modeling this can be done by including a new predictor called an *interaction* term
+
+## Adding an interaction term
+
+$\begin{align}
+Y &= \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 + \epsilon \\
+&= \beta_0 + (\beta_1 + \beta_3X_2)X_1 + \beta_2X_2 + \epsilon \\
+&= \beta_0 + \hat{\beta_1}X_1 + \beta_2X_2 + \epsilon
+\end{align}$
+
+* Since $\hat{\beta_1}$ changes with $X_2$, the effect of $X_1$ on $Y$ is no longer constant
+    + Adjusting $X_2$ will change the impact of $X_1$ on $Y$
+* Consider the factory example, can't increase units by just adding another production line, you also need workers to operate the lines!
+
+## Sales data with interaction term
+
+$\begin{align}
+sales &= \beta_0 + \beta_1 \times TV + \beta_2 \times Radio + \beta_3 \times (Radio \times TV) + \epsilon \\
+&= \beta_0 + (\beta_1 + \beta_3 \times Radio) \times TV + \beta_2 \times Radio + \epsilon
+\end{align}$
+
+* We interpret $\beta_3$ as the increase in the effectiveness of **TV** advertising for a one unit increase in **Radio** advertising (or vice-versa)
+
+## Sales model with interaction term {.smaller}
+
+```{r echo=TRUE}
+advertising <- read.csv("Advertising.csv")
+fit1 <- lm(Sales ~ TV + Radio, data = advertising)
+fit2 <- lm(Sales ~ TV + Radio + TV*Radio, data = advertising)
+```
+
+```{r}
+kable(summary(fit2)$coeff, digits = 4)
+```
+
+* We add an interaction term between **Radio** and **TV**
+* The adjusted $R^2$ improves **signficantly**
+    + With no interaction term, the adjusted $R^2$ is ```r percent(summary(fit1)$adj.r.squared)```
+    + With an interaction term, the adjusted $R^2$ is ```r percent(summary(fit2)$adj.r.squared)```
+
+## Terminology for interaction terms
+
+* The *main effects* are the predictors that are not interaction terms
+    + TV, Radio are the *main effects* in the previous model
+* The *interaction effects* are predictors that are derived from *main effects*
+    + TV$\times$Radio in the model is an *interaction effect*
+* If you include an interaction term, you should also include the main effects that make up the interaction, even if the p-values associated with the main effects are not significant
+    + Book calls this the *hierarchical principle*
+
+## Interaction terms for qualitative predictors {.smaller}
+
+* Consider the **Credit** data set, we want to predict **balance** using **income** (quantitative) and **student** (qualitative) variables.  With no interaction term, the model takes the form
+
+$\begin{align}
+balance_i &\approx \beta_0 + \beta_1 \times income_i + 
+\begin{cases}
+\beta_2 &\text{if }i\text{th person is a student} \\
+0 &\text{if }i\text{th person is not a student}
+\end{cases} \\
+&= \beta_1 \times income_i +
+\begin{cases}
+\beta_0 + \beta_2 &\text{if }i\text{th person is a student} \\
+\beta_0 &\text{if }i\text{th person is not a student}
+\end{cases}
+\end{align}$
+
+* With an interaction term, the model takes the form
+
+$\begin{align}
+balance_i &\approx \beta_0 + \beta_1 \times income_i + 
+\begin{cases}
+\beta_2 + \beta_3 \times income_i &\text{if student} \\
+0 &\text{if not student}
+\end{cases} \\
+&=
+\begin{cases}
+(\beta_0 + \beta_2) + (\beta_1 + \beta_3) \times income_i &\text{if student} \\
+\beta_0 + \beta_1 \times income_i &\text{if not student}
+\end{cases}
+\end{align}$
+
+## Non-linear Relationships
+
+* Emphasize parabola shape to data for quadratic equation
+* Even though we are using a non-linear function of horsepower, we still have a linear model
+    + It is simply a multiple linear regression model with $X_1 = horsepower$ and $X_2 = horsepower^2$
+    + Sometimes called *linear in the coefficients*
+* Emphasize use of the word "wiggly"
+    + Does this lead to a good model that can predict unseen data?
+    + Overfitting
+* Do they explain why we had $horsepower$ and $horsepower^2$?  Why not just $horsepower^2$?
+* Include the term *polynomial regression*
+
+## Potential Problems
+
+## Non-linearity of the Data
+
+## Correlation of Error Terms
+
+## Non-constant Variance of Error Terms
+
+## Outliers
+
+## High Leverage Points
+
+## Collinearity
+
+## The Marketing Plan
