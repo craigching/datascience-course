@@ -9,6 +9,7 @@ output: ioslides_presentation
 library(knitr)
 library(scales)
 library(broom)
+library(ISLR)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -200,7 +201,57 @@ balance_i &\approx \beta_0 + \beta_1 \times income_i +
 \end{cases}
 \end{align}$
 
+## Interaction terms for qualitative predictors (visualization)
+
+```{r, out.width = 800, fig.retina = NULL}
+knitr::include_graphics("images/3.7.png")
+```
+
+
 ## Non-linear Relationships
+
+* Linear regression model assumes a linear relationship between response and predictors
+* But the true relationship may be non-linear
+* Polynomial regression - a simple way to extend the linear model to accommodate non-linear relationships
+
+## **Auto** data set {.smaller}
+
+```{r, out.width = 400, fig.retina = NULL}
+knitr::include_graphics("images/3.8.png")
+```
+
+* There is a pronounced relationship between **mpg** and **horsepower**, but it seems clear the relationship is non-linear
+* A simple approach is to include transformed versions of the predictors in the model
+    + It appears that the points have a *quadratic* shape
+
+## Quadratic model
+
+* The previous plot suggests a model of the form
+
+$mpg = \beta_0 + \beta_1 \times horsepower + \beta_2 \times horsepower^2$
+
+* The model involved predicting **mpg** using a non-linear function of **horsepower**
+    + *But it is still a linear model!*
+    + It is simply a multiple linear regression model with $X_1 = horsepower$ and $X_2 = horsepower^2$
+
+## Model analysis {.smaller}
+
+```{r echo=TRUE}
+fit1 <- lm(mpg ~ horsepower, data = Auto)
+fit2 <- lm(mpg ~ horsepower + I(horsepower^2), data = Auto)
+```
+
+```{r}
+kable(summary(fit2)$coeff, digits = 4)
+```
+
+* The $R^2$ of the quadratic fit is ```r percent(summary(fit2)$adj.r.squared)``` compared to ```r percent(summary(fit1)$adj.r.squared)``` for the linear fit
+* The p-value for the quadratic term is highly significant
+* Adding a quadratic term worked so well, why not include $horsepower^3$, $horsepower^4$ or even $horsepower^5$?
+    + The green curve includes all polynomials up to the 5th degree
+    + Looks a bit *wiggly*
+
+## Goals
 
 * Emphasize parabola shape to data for quadratic equation
 * Even though we are using a non-linear function of horsepower, we still have a linear model
