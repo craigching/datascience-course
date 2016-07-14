@@ -18,6 +18,19 @@ credit <- read.csv("Credit.csv")
 
 ## Recap
 
+* Estimating coefficients using least squares for multiple predictors
+* Model interpretation
+* Model selection and statistics for goodness of fit
+* Uncertainties surrounding models
+
+## Recap -- Interpreting coefficients in MLR
+
+$sales = \beta_0 + \beta_1 \times TV + \beta_2 \times radio + \beta_3 \times newspaper + \epsilon$
+
+* Coefficients $\beta_1, \beta_2, \beta_3$ are the "average increase in the response to a one-unit increase in the predictor holding all other predictors fixed"
+* Additive assumption in the linear model
+    + More on this today!
+
 ## Qualitative Predictors
 
 * Thus far our variables have been *quantitative*
@@ -251,30 +264,162 @@ kable(summary(fit2)$coeff, digits = 4)
     + The green curve includes all polynomials up to the 5th degree
     + Looks a bit *wiggly*
 
-## Goals
-
-* Emphasize parabola shape to data for quadratic equation
-* Even though we are using a non-linear function of horsepower, we still have a linear model
-    + It is simply a multiple linear regression model with $X_1 = horsepower$ and $X_2 = horsepower^2$
-    + Sometimes called *linear in the coefficients*
-* Emphasize use of the word "wiggly"
-    + Does this lead to a good model that can predict unseen data?
-    + Overfitting
-* Do they explain why we had $horsepower$ and $horsepower^2$?  Why not just $horsepower^2$?
-* Include the term *polynomial regression*
-
 ## Potential Problems
 
-## Non-linearity of the Data
+* Most common problems that may appear:
+    + Non-linearity of the response-predictor relationships
+    + Correlation of error terms
+    + Non-constant variance of error terms
+    + Outliers
+    + High-leverage points
+    + Collinearity
+* Overcoming these problems is as much an art as a science!
+
+## Non-linearity of the Data {.smaller}
+
+```{r, out.width = 400, fig.retina = NULL}
+knitr::include_graphics("images/3.9.png")
+```
+
+* *Residual plot*
+    + Help ascertain if the linear relationship holds
+    + Plot residuals vs. fitted values
+    + Should see no discernable pattern
+* If the residual plot indicates there are non-linear associations, then a simple approach is to use non-linear transformations of the predictors, such as $log X$, $\sqrt{X}$, and $X^2$
+
 
 ## Correlation of Error Terms
 
-## Non-constant Variance of Error Terms
+* Assumption of the linear model is that the error terms are uncorrelated
+    + The fact that $\epsilon_i$ is positive provides little or no information about the sign of $\epsilon_{i+1}$
+* If the error terms *are* correlated, then the estimated standard errors will tend to underestimate the true standard errors
+    + Confidence and prediction intervals will be narrower than they should be
+    + p-values associated with the model will be lower than they should be
+* If error terms are correlated we may have an unwarranted sense of confidence in our model
 
-## Outliers
+## Time Series data {.smaller}
 
-## High Leverage Points
+```{r, out.width = 300, fig.retina = NULL}
+knitr::include_graphics("images/3.10.png")
+```
 
-## Collinearity
+* Correlated error terms frequently occur in the context of *time series* data
+* Observations that are obtained at adjacent time points will
+have positively correlated errors
+* We can plot the residuals as a function of time to determine this
+    + If the errors are uncorrelated, then there should be no discernable patterns
+    + If the errors are positively correlated, *tracking* can occur
+
+## Non-constant Variance of Error Terms {.smaller}
+
+```{r, out.width = 300, fig.retina = NULL}
+knitr::include_graphics("images/3.11.png")
+```
+
+* Linear models assume constant variance in error terms, i.e.:
+
+$Var(\epsilon_i) = \sigma^2$
+
+* Often this is not the case
+* Variance may increase with the value of the response
+    + Heteroscedasticity, indicated by a funnel shape in the residual plot
+* Can correct for this problem by transforming the response using a concave function such as $log Y$ or $\sqrt{Y}$
+* *Weighted least squares* is an option in some cases
+
+## Outliers {.smaller}
+
+```{r, out.width = 600, fig.retina = NULL}
+knitr::include_graphics("images/3.12.png")
+```
+
+* An *outlier* occurs when $y_i$ is far from the value predicted
+    + Can happen for a variety of reasons, such as incorrect data input
+* Note that the outlier in this example doesn't have much effect on the regression line
+* But it can have a dramatic effect on RSE, which can effect confidence intervals and p-values
+* Residual plots can be used to identify outliers
+    + *Studentized* residuals can be used as an objective gauge on outliers
+* Must be careful in how you handle outliers
+
+## High Leverage Points {.smaller}
+
+```{r, out.width = 600, fig.retina = NULL}
+knitr::include_graphics("images/3.13.png")
+```
+
+* Outliers are observations for which the response is unusual given the predictor
+* Observations with *high leverage* have an unusual value for the predictor
+    + They tend to have a sizable effect on the estimated regression line
+* Use the *leverage statistic* to quantify an observation's leverage
+    + Especially useful in multiple linear regression
+* Note that observation 40 has high leverage and is an outlier, a deadly combination!
+
+## Collinearity {.smaller}
+
+```{r, out.width = 400, fig.retina = NULL}
+knitr::include_graphics("images/3.14.png")
+```
+
+* If two predictors are highly correlated, we say the are *collinear*
+* It can be hard to determine how each collinear variable is associated with the response
+
+## Quantifying collinearity {.smaller}
+
+```{r, out.width = 400, fig.retina = NULL}
+knitr::include_graphics("images/3.15.png")
+```
+
+* Collinearity reduces the accuracy of the estimates of the regression coefficients
+* Compare the left and right panels above, in the right, minimizing the RSS has some uncertainty
+* Simple way to detect collinearity is a corrleation matrix of predictors
+    + Multicollinearity can not be detected this way!
+* *Variance inflation factor* (VIF) can be used
+    + Smallest value is 1, a VIF that exceeds 5 or 10 indicates a problematic amount of collinearity
+
+## Resolving collinearity
+
+* Two simple solutions
+    + Drop one of the problematic variables from the model
+    + Combine collinear variables together into a single predictor
+
 
 ## The Marketing Plan
+
+1. *Is there a relationship between advertising sales and budget?*
+2. *How strong is the relationship?*
+3. *Which media contribute to sales?*
+4. *How large is the effect of each medium on sales?*
+5. *How accurately can we predict future sales?*
+6. *Is the relationship linear?*
+7. *Is there synergy among the advertising media?*
+
+## Is there a relationship between advertising sales and budget?
+
+We used the F-statistic to derive p-values which were low indicating that there is a significant relationship between advertising and sales.
+
+## How strong is the relationship?
+
+We used the RSE and the $R^2$ statistic to quantify the fit of the model.  The $R^2$ in particular explained almost 90% of the variance in sales.
+
+## Which media contribute to sales?
+
+Using the p-values for each predictor we found that TV and radio were signficant while newspaper was not.  So we conclude that TV and radtion are related to sales.
+
+## How large is the effect of each medium on sales?
+
+We found the confidence intervales for each medium and while TV and radio were narrow and didn't include 0, the confidence interval for newspaper did include 0 indicating that newspaper is not statistically significant given TV and radio.
+
+We check for collinearity to see if that can explain why the confidence intervales for newspaper are so wide, but find that the VIF scores are near 1, indicating that collinearity is not a problem.
+
+Separate simple linear regressions indicate strong association between TV and sales and radio and sales, but only a mild association with newspapre and sales.
+
+## How accurately can we predict future sales?
+
+The accuracy depends on whether we want to an individual response or the average response.  If the former, then we use a prediction interval, and if the latter, we use a confidence interval.
+
+## Is the relationship linear?
+
+For the **Advertising** data we observed a non-linear effect in the plot of the data itself, but a residual plot would also show the non-linear effect.  We discussed the inclusion of transformations of predictors  in order to accommodate non-linear relationships.
+
+## Is there synergy among the advertising media?
+
+We included an interaction term in the regression model and found a small p-value associated with the interaction term indicating that there is a significant effect.  By adding the interaction term, our $R^2$ substantially increased from about 90% to almost 97%.
