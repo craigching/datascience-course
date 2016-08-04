@@ -71,12 +71,14 @@ for (i in 1:nrow(iris_m)) {
 i = 28
 
 mtcars_m <- select(mtcars, wt, qsec)
+mtcars_lm <- select(mtcars, mpg, wt, qsec)
 mtcars_train <- mtcars_m[-i, ]
+mtcars_train_lm <- mtcars_lm[-i, ]
 mtcars_predict <- mtcars_m[i, ]
 classes <- select(mtcars, mpg)
 my.knn(mtcars_train, mtcars_predict, classes[-i, ], 5, regression = TRUE)
 
-fit <- lm(mpg ~ wt + qsec, data = mtcars_train)
+fit <- lm(mpg ~ wt + qsec, data = mtcars_train_lm)
 predict(fit, mtcars_predict)
 
 mtcars[i, ]
