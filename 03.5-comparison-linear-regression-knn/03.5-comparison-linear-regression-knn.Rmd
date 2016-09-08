@@ -113,11 +113,17 @@ knitr::include_graphics("images/3.20.png")
 * If the test MSE of KNN is only slightly lower than that of linear regression, we might forego a little bit of prediction accuracy for the sake of a simple model that can be described in terms of just a few coefficients, and for
 which p-values are available.
 
-## Linear Regression Review
+## Linear Regression Review {.smaller}
 
-* Simple Linear Regression
-    + Single predictor, single quantitative response
-* Multiple Linear Regression
-    + Multiple predictors, single quantitative response
-* Predictors can be quantitative or qualitative
-    + Create dummy variables for qualitative predictors
+* Linear Regression
+    + Interpreting the model
+    + Deciding on important variables
+    + Goodness of fit (RSE, $R^2$)
+* Other considerations
+    + Qualitative predictors
+    + Extensions of the linear model
+    + Diagnostics for linear models
+* Fundamental concepts
+    + Bias-Variance Tradeoff
+    + Parametric vs Non-parametric
+    + Curse of dimensionality
