@@ -47,7 +47,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * In general there is no natural way to convert a qualitative response variable with more than two levels into a quantitative response that is ready for linear regression
 * For a binary qualitative response, the situation is better
     + We could potentially use the *dummy variable* approach from the last chapter
-    
+
 $Y=
 \begin{cases}
 0 & \text{if } stroke\\
@@ -85,6 +85,8 @@ knitr::include_graphics("images/4.2.png")
 $p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$
 
 * Produces an S-shaped curve
+=======
+* To fit the model we use *maximum likelihood*
 * We now predict low balances as close to, but never below, zero
 * High balances are predicted as close to, but never above, one
 * Better captures the range of probabilities than the linear model
@@ -94,7 +96,7 @@ $p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$
 ## Odds and Log Odds
 
 $\frac{p(X)}{1 - p(X)} = e^{\beta_0 + \beta_1X}$
- 
+
 * The *odds*, used in horse-racing
 * 1 in 5 people with an odds of 1/4 will default
     + $\frac{0.2}{1 - 0.2} = 1/4$
@@ -238,7 +240,3 @@ $Pr(Y = k|X) = \frac{e^{\beta_{0k} + \beta_{1k}X_1 + \ldots + \beta_{pk}X_p}}{\s
 
 * There is a linear function for *each* class
 * Known as the *softmax* function
-
-
-
-
