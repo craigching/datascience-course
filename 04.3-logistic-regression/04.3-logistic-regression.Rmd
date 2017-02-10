@@ -84,7 +84,7 @@ knitr::include_graphics("images/4.2.png")
 
 $p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$
 
-* To fit the model we use *maxium likelihood*
+* To fit the model we use *maximum likelihood*
 * We now predict low balances as close to, but never below, zero
 * High balances are predicted as close to, but never above, one
 * Produces an S-shaped curve
