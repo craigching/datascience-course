@@ -84,11 +84,11 @@ knitr::include_graphics("images/4.2.png")
 
 $p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}$
 
-* To fit the model we use *maxium likelihood*
+* Produces an S-shaped curve
 * We now predict low balances as close to, but never below, zero
 * High balances are predicted as close to, but never above, one
-* Produces an S-shaped curve
 * Better captures the range of probabilities than the linear model
+* To fit the model we use *maxium likelihood*
 * The *sigmoid* function is a special case of the logistic function
 
 ## Odds and Log Odds

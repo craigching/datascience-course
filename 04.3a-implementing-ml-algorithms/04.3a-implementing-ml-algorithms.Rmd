@@ -226,7 +226,18 @@ def gradient_descent(Y, X, theta, costf, gradientf, alpha=1e-7, max_iterations=1
 
 ## What's left?
 
-* There is a lot more that could be done
+* Implement prediction
+* Dynamically update $\alpha$ to ensure convergence
+* Implement stochastic gradient descent
+* Implmenent model diagnostics
+* Implement regularization
+  + Helps with overfitting
+
+## Other topics
+
+* Newton-Raphson method for optimization
+* The perceptron
+* Generalized Linear Models (GLM)
 
 ## References
 
