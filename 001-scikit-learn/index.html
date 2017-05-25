@@ -36,7 +36,7 @@
   <hgroup class="auto-fadein">
     <h1>Python Machine Learning</h1>
     <h2>Introduction to scikit-learn and Jupyter</h2>
-    <p>Craig Ching<br/>Product Development Architect</p>
+    <p>Craig Ching<br/>Machine Learning Ninja</p>
   </hgroup>
   <article></article>  
 </slide>
@@ -87,15 +87,15 @@ slide pre code {
 <ul>
 <li>Python Machine Learning</li>
 </ul></li>
-<li>Matplotlib (<a href="http://matplotlib.org">http://matplotlib.org</a>)
-
-<ul>
-<li>Python plotting and visualization</li>
-</ul></li>
 <li>Jupyter (<a href="http://jupyter.org">http://jupyter.org</a>)
 
 <ul>
 <li>Python notebooks (and other languages/environments)</li>
+</ul></li>
+<li>Matplotlib (<a href="http://matplotlib.org">http://matplotlib.org</a>)
+
+<ul>
+<li>Python plotting and visualization</li>
 </ul></li>
 <li>Pandas (<a href="http://pandas.pydata.org">http://pandas.pydata.org</a>)
 
@@ -374,8 +374,8 @@ slide pre code {
 <pre><code class="python">import sklearn.linear_model import LogisticRegression
 
 model = LogisticRegression()
-model.fit(X, y)
-y_est = model.predict(X_new)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
 </code></pre>
 
   </article>
@@ -397,6 +397,23 @@ y_est = model.predict(X_new)
 
 <slide class="" id="slide-16" style="background:;">
   <hgroup>
+    <h2>Further Activities</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Install scikit-learn and Jupyter</li>
+<li>Download the Jupyter notebook that we worked with</li>
+<li>Use a decision tree to predict against the iris dataset</li>
+<li>Use 5-fold cross validation to report the mean error of logistic regression on the iris dataset</li>
+<li>Compare logistic regression and SVC on the digits dataset</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
     <h2>Pop Quiz!</h2>
   </hgroup>
   <article data-timings="">
@@ -408,7 +425,7 @@ y_est = model.predict(X_new)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Classification</h2>
   </hgroup>
@@ -438,7 +455,7 @@ y_est = model.predict(X_new)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>NumPy Matrix Calculations</h2>
   </hgroup>
@@ -466,7 +483,7 @@ y_est = model.predict(X_new)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Regression vs. Classification</h2>
   </hgroup>
@@ -487,6 +504,60 @@ y_est = model.predict(X_new)
   
   <div class="quiz-explanation">
   <p>Most algorithms do provide a way to perform both classification and regression.  Usually regression follows on from classification by using some sort of &quot;averaging&quot; computation.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>Which of the following is <strong>not</strong> a feature of the iris dataset?</p>
+
+<ol>
+<li>Sepal length</li>
+<li>Petal width</li>
+<li>Petal length</li>
+<li><em>Stem circumference</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-explanation">
+  <p>As we saw in the Jupyter notebook, the iris dataset has four features, sepal length and width and petal length and width.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>You&#39;re on a nature hike and you see this beautiful iris along a path, but you don&#39;t know what kind it is.  You are a machine learning ninja, and you know that scikit-learn has the iris dataset, so you can predict the species if you could measure some features of the iris.  You whip out your tape measure and measure petal length and width and sepal length and width.  Now, which machine learning algorithm can help you predict what type of iris you saw?</p>
+
+<ol>
+<li>k-means clustering</li>
+<li><em>Random Forest</em></li>
+<li>Ordinary least squares regression</li>
+<li>DBSCAN</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-explanation">
+  <p>k-means and DBSCAN are clustering algorithms, not classification algorithms.  Though you could add your measurements to the iris dataset and see where they cluster, the most appropriate alogorithm to use since you have labeled data is Random Forest.  Obviously we don&#39;t want to use linear regression for a classification problem.</p>
 
 </div>
 </div>
@@ -590,26 +661,44 @@ y_est = model.predict(X_new)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Pop Quiz!'>
+        data-slide=16 title='Further Activities'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Classification'>
+        data-slide=17 title='Pop Quiz!'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='NumPy Matrix Calculations'>
+        data-slide=18 title='Classification'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Regression vs. Classification'>
+        data-slide=19 title='NumPy Matrix Calculations'>
          19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Regression vs. Classification'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='NA'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='NA'>
+         22
       </a>
     </li>
   </ul>
