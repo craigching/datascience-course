@@ -78,6 +78,13 @@ slide pre code {
 * Dimensionality reduction
 * Model selection
 * Preprocessing
+* Reference: http://scikit-learn.org/stable/documentation.html
+
+---
+
+## scikit-learn map
+
+![width](ml_map.png)
 
 ---
 
@@ -183,6 +190,14 @@ slide pre code {
 * Each machine learning algorithm (and beyond really) implements a standard interface
     + fit(X, y) - Given the data and labels, fit a model
     + predict(X) - Given unseen data, predict the response
+
+```python
+import sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X, y)
+y_est = model.predict(X_new)
+```
 
 ---
 
