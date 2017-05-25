@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python Machine Learning</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Python Machine Learning">
+  <meta name="author" content="Craig Ching">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Python Machine Learning</h1>
+    <h2>Introduction to scikit-learn and Jupyter</h2>
+    <p>Craig Ching<br/>Product Development Architect</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+}
+slide:not(.segue) h2 {
+  color: #800000
+}
+slide pre code {
+  font-size: 11px ;
+}
+</style>
+
+<h2>Why Python?</h2>
+
+<ul>
+<li>More accessible than R
+
+<ul>
+<li>Python is a general purpose language used for many different things including web frameworks <em>and</em> machine learning</li>
+</ul></li>
+<li>More popular than R
+
+<ul>
+<li>Maybe not with data scientists?</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Python for Data Science</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>scikit-learn (<a href="http://scikit-learn.org">http://scikit-learn.org</a>)
+
+<ul>
+<li>Python Machine Learning</li>
+</ul></li>
+<li>Matplotlib (<a href="http://matplotlib.org">http://matplotlib.org</a>)
+
+<ul>
+<li>Python plotting and visualization</li>
+</ul></li>
+<li>Jupyter (<a href="http://jupyter.org">http://jupyter.org</a>)
+
+<ul>
+<li>Python notebooks (and other languages/environments)</li>
+</ul></li>
+<li>Pandas (<a href="http://pandas.pydata.org">http://pandas.pydata.org</a>)
+
+<ul>
+<li>Python data frames</li>
+</ul></li>
+<li>Others
+
+<ul>
+<li>Seaborn</li>
+<li>Plot.ly (commercial)</li>
+<li>Rodeo</li>
+<li>Sympy</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Installation</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><a href="http://scikit-learn.org">http://scikit-learn.org</a></li>
+<li><p>Requires</p>
+
+<ul>
+<li>Python (&gt;= 2.6 or &gt;= 3.3)</li>
+<li>NumPy (&gt;= 1.6.1)</li>
+<li>SciPy (&gt;= 0.9)</li>
+</ul></li>
+<li><p>Installation (for Unix-like operating systems)</p>
+
+<ul>
+<li>pip install numpy --upgrade</li>
+<li>pip install scipy --upgrade</li>
+<li>pip install scikit-learn --upgrade</li>
+<li>pip install jupyter --upgrade</li>
+</ul></li>
+<li><p>Other options available at <a href="http://scikit-learn.org/stable/install.html">http://scikit-learn.org/stable/install.html</a></p>
+
+<ul>
+<li>Anaconda is particularly recommended</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>What is scikit-learn?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Library for doing machine learning in Python
+
+<ul>
+<li>See main page for details</li>
+</ul></li>
+<li>Classification</li>
+<li>Regression</li>
+<li>Clustering</li>
+<li>Dimensionality reduction</li>
+<li>Model selection</li>
+<li>Preprocessing</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>What is NumPy?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>ndarray (tensor)</li>
+<li>Broadcasting</li>
+<li>Tools for integrating C/C++ and Fortran code</li>
+<li>Linear algebra, Fourier transform, and random number capabilities</li>
+<li>Reference: <a href="https://docs.scipy.org/doc/numpy/">https://docs.scipy.org/doc/numpy/</a></li>
+</ul>
+
+<pre><code class="python">    S = my_cov(X)
+    means = my_mean(X)
+
+    # Estimate the prior from our data
+    prior = X.shape[0] / np.float64(n)
+
+    # Calculate the inverse and determinant of S for later use
+    Sinv = la.inv(S)
+    Sdet = la.det(S)
+
+    # Quadratic discriminant ref Alpaydin &quot;Introduction to Machine Learning, Third Edition&quot;
+    self.W_i = (-1/2.) * Sinv
+    self.w_i = Sinv.dot(means)
+    self.w_i0 = (-1/2.) * (
+        means.T.dot(Sinv.dot(means))) - (1/2.) * np.log(Sdet) + np.log(prior)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>What is SciPy?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Superset of NumPy</li>
+<li>Provides tools for scientific computation</li>
+<li>Ultimately mostly not useful to us except that it is a pre-requisite of scikit-learn
+
+<ul>
+<li>When implementing machine learning algorithms, there are some features that might be useful to us</li>
+</ul></li>
+<li>Reference: <a href="https://docs.scipy.org/doc/scipy/reference/">https://docs.scipy.org/doc/scipy/reference/</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What is Jupyter?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>A notebook, it allows you to create documents that include live code that you can share with others</li>
+<li>Best to see an example
+
+<ul>
+<li>And we will!</li>
+</ul></li>
+<li>Note that it used to be called &quot;IPython&quot;
+
+<ul>
+<li>The Jupyter project intends to expand beyond Python</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Exploring scikit-learn - Machine Learning</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Machine learning algorithms</li>
+<li>Classification
+
+<ul>
+<li>Logistic regression, SVM, Decision Trees</li>
+</ul></li>
+<li>Regression
+
+<ul>
+<li>Linear regression, SVR, Nearest Neighbors</li>
+</ul></li>
+<li>Clustering
+
+<ul>
+<li>K-means, DBSCAN, Gaussian mixtures</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Exploring scikit-learn - Dimensionality reduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Principal Component Analysis (PCA)</li>
+<li>Fisher&#39;s LDA</li>
+<li>Factor Analysis</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Exploring scikit-learn - Model selection</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Cross-validation</li>
+<li>Hyper-parameter tuning</li>
+<li>Model evaluation
+
+<ul>
+<li>Confusion matrix</li>
+<li>ROC, AIC</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Exploring scikit-learn - Preprocessing</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Standardization</li>
+<li>Normalization</li>
+<li>Binarization</li>
+<li>Imputation</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Exploring scikit-learn - Datasets</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Boston housing prices (regression)</li>
+<li>Iris species (classification)</li>
+<li>Diabetes (regression)</li>
+<li>Digits (classification)</li>
+<li>Linnerud (multi-variate regression)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>scikit-learn Standard Interface</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Each machine learning algorithm (and beyond really) implements a standard interface
+
+<ul>
+<li>fit(X, y) - Given the data and labels, fit a model</li>
+<li>predict(X) - Given unseen data, predict the response</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Exploring Jupyter Notebooks</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Demo</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Pop Quiz!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Really?!?!?</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Classification</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>scikit-learn provides many different algorithms for classification in a supervised learning setting.  Which of the following is not an algorithm that scikit-learn provides?</p>
+
+<ol>
+<li>Logistic Regression</li>
+<li>Support Vector Machine (SVC)</li>
+<li><em>Hotdog/Not Hotdog</em></li>
+<li>Decision Trees</li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-explanation">
+  <p>Logistic Regression, SVC, and Decision Trees are all algorithms provided by scikit-learn. Hotdog/Not Hotdog is a joke from the show <em>Silicon Valley</em></p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>NumPy Matrix Calculations</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>NumPy, written in Python, can&#39;t possibly be efficient for numerical computing.  There are issues like the GIL, etc.  So, Python <em>can not</em> be used for efficient computing.</p>
+
+<ol>
+<li>True</li>
+<li><em>False</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-explanation">
+  <p>To avoid the GIL and provide really efficient matrix operations, NumPy uses f2py and other native libraries to create a wrapper around lower-level Fortran and C++ code.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Regression vs. Classification</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>C&#39;mon, regression predicts continuous responses while classification makes discrete predictions.  There is <em>no way</em> that you can use the same algorithm for both classification and regression!</p>
+
+<ol>
+<li>True</li>
+<li><em>False</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-explanation">
+  <p>Most algorithms do provide a way to perform both classification and regression.  Usually regression follows on from classification by using some sort of &quot;averaging&quot; computation.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Python for Data Science'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Installation'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What is scikit-learn?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What is NumPy?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What is SciPy?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What is Jupyter?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Exploring scikit-learn - Machine Learning'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Exploring scikit-learn - Dimensionality reduction'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Exploring scikit-learn - Model selection'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Exploring scikit-learn - Preprocessing'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Exploring scikit-learn - Datasets'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='scikit-learn Standard Interface'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Exploring Jupyter Notebooks'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Pop Quiz!'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Classification'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='NumPy Matrix Calculations'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Regression vs. Classification'>
+         18
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
