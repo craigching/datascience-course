@@ -2,7 +2,7 @@
 title       : Python Machine Learning
 subtitle    : Introduction to scikit-learn and Jupyter
 author      : Craig Ching
-job         : Product Development Architect
+job         : Machine Learning Ninja
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -36,10 +36,10 @@ slide pre code {
 
 * scikit-learn (http://scikit-learn.org)
     + Python Machine Learning
-* Matplotlib (http://matplotlib.org)
-    + Python plotting and visualization
 * Jupyter (http://jupyter.org)
     + Python notebooks (and other languages/environments)
+* Matplotlib (http://matplotlib.org)
+    + Python plotting and visualization
 * Pandas (http://pandas.pydata.org)
     + Python data frames
 * Others
@@ -78,6 +78,13 @@ slide pre code {
 * Dimensionality reduction
 * Model selection
 * Preprocessing
+* Reference: http://scikit-learn.org/stable/documentation.html
+
+---
+
+## scikit-learn map
+
+![width](ml_map.png)
 
 ---
 
@@ -184,11 +191,29 @@ slide pre code {
     + fit(X, y) - Given the data and labels, fit a model
     + predict(X) - Given unseen data, predict the response
 
+```python
+import sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+```
+
 ---
 
 ## Exploring Jupyter Notebooks
 
 * Demo
+
+---
+
+## Further Activities
+
+* Install scikit-learn and Jupyter
+* Download the Jupyter notebook that we worked with
+* Use a decision tree to predict against the iris dataset
+* Use 5-fold cross validation to report the mean error of logistic regression on the iris dataset
+* Compare logistic regression and SVC on the digits dataset
 
 ---
 
@@ -237,3 +262,28 @@ C'mon, regression predicts continuous responses while classification makes discr
 
 Most algorithms do provide a way to perform both classification and regression.  Usually regression follows on from classification by using some sort of "averaging" computation.
 
+--- &radio
+
+Which of the following is **not** a feature of the iris dataset?
+
+1. Sepal length
+2. Petal width
+3. Petal length
+4. _Stem circumference_
+
+*** .explanation
+
+As we saw in the Jupyter notebook, the iris dataset has four features, sepal length and width and petal length and width.
+
+--- &radio
+
+You're on a nature hike and you see this beautiful iris along a path, but you don't know what kind it is.  You are a machine learning ninja, and you know that scikit-learn has the iris dataset, so you can predict the species if you could measure some features of the iris.  You whip out your tape measure and measure petal length and width and sepal length and width.  Now, which machine learning algorithm can help you predict what type of iris you saw?
+
+1. k-means clustering
+2. _Random Forest_
+3. Ordinary least squares regression
+4. DBSCAN
+
+*** .explanation
+
+k-means and DBSCAN are clustering algorithms, not classification algorithms.  Though you could add your measurements to the iris dataset and see where they cluster, the most appropriate alogorithm to use since you have labeled data is Random Forest.  Obviously we don't want to use linear regression for a classification problem.
