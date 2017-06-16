@@ -34,8 +34,8 @@ def gradient_descent(Y, X, theta, costf, gradientf, alpha=1e-7, max_iterations=1
         diff = np.abs(temp-prev)
         prev = temp
         i += 1
-        if i % 1000 == 0:
-            print('iteration {}'.format(i))
+        # if i % 1000 == 0:
+        #     print('iteration {}'.format(i))
 
     print("number of iterations: {}".format(i))
 

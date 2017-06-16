@@ -117,13 +117,28 @@ $\min\limits_{C_1, \dots, C_K}\left\{ \sum\limits_{k=1}^K \frac1{|C_k|} \sum\lim
 * K-Means suffers from a number of degenerate issues.  We will explore this in the demo.  Be aware that there are some opinions that say that K-Means needs to be used very carefully.
 
 ---
-## TODO
-Mention other uses, quantization/compression
+## Quantization
+
+* An image stored with 24 bits/pixel can have up to 16 million colors
+* Assume we have a color screen 8 bits/pixel that can display only 256 colors
+* We can use K-Means clustering to find the best 256 colors among all 16 million colors such that the image using only 256 colors in the palette looks as close to the original image as possible.
+* This is called *color quantization*
+* Lots of uses for this, e.g., reference vectors, codebook vectors, compression
 
 ---
 ## Expectation Maximization
 
 * K-Means is a special case of EM using Gaussian mixture models
+    + $\hat{p}_i (\mathbf{x}^t | \Phi) \sim N(\mathbf{m}_i, s^2\mathbf{I})$
+    + Inputs are assumed independent with equal and shared variances
+    + All components have equal priors
+    + Labels are hardened
+    + Clusters are "circles" as opposed to "ellipses" of GMM
+* EM Algorithm
+    + E step - Estimate the latent labels $\mathbf{z}_i^t$ given current estimates of the component prior, mean,
+and covariance.  Use K-Means for initial estimates
+    + M step - Update the component prior, mean, and covariance given the labels estimated in the
+E-step.
 
 ---
 ## Hierarchical Clustering
@@ -256,10 +271,69 @@ Disadvantages
 
 
 ---
+## Topic Modeling
+
+*Topic modeling* is an application of the Bayesian approach in text processing.  Today, there are a large number of documents of many different types including scientific articles, web pages, emails, and blog posts.  Finding a relevant topic for a query is very difficult unless documents are annotated.  Manual annotation of documents is very expensive and difficult, so we'd like to perform this annotation automatically.
+
+Assume we have a vocabulary of with $M$ words.  Each document contains $N$ words chosen from a number of topics.  A document may be partially "arts" and "politics", for example.  Each topic is in turn is defined as a mixture of the $M$ words - in other words, each topic corresponds to a probability distribution over words.  For example, for the topic arts, the word "painting" and "sculpture" have a high probability, but the word "knee" has a low probability.
+
+---
 ## Latent Dirichlet Allocation (LDA)
+
+* In LDA, we define a *generative process*:
+    + There are $K$ *topics*
+    + A vocabulary of $M$ *words*
+    + Documents contain $N$ words
 
 
 ---
-## Clustering Considerations
+## Topic Modeling Redux
 
-* Should the observations or features first be standardized in some way?
+Methods for organizing, searching, exploiting electronic archives
+
+1. Uncover the hidden topical patterns that pervade the collection
+    + Wikipedia has +1,000,000 articles about some topics and those topics overlap
+    + What are the different topics that pervade this collection
+2. Annotate the documents according to those topics
+    + If I take a document out of wikipedia, what topics is that article about
+3. Use annotations to organize, summarize, and search the texts
+
+---
+## LDA
+
+* Documents exhibit multiple topics
+* Generative Probabilistic Process
+    + Each document is a random mixture of corpus-wide topics
+    + Each word is drawn from one of those topics
+
+Combines words about different topics.  In contrast to the assumptions made by a mixture model which says that all of these words come from a single component, a single topic.
+
+
+
+---
+## Demo
+![width](./images/demo-time.jpg)
+
+---
+## Quiz!
+![width](./images/you-know-nothing.gif)
+
+---
+## 
+
+---
+## Further Reading
+
+* K-Means algorithm for big data analytics
+
+https://stats.stackexchange.com/a/183240
+
+* How to understand the drawbacks of K-Means
+
+These two are from the same question, but both answers are brilliant:
+
+https://stats.stackexchange.com/a/133841
+
+https://stats.stackexchange.com/a/133694
+
+The latter link points to a blog post by the same author that dives a bit deeper and is worth reading.
