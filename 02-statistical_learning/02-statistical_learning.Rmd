@@ -1,12 +1,69 @@
 ---
-title: "02-Statistical Learning"
-author: "Craig Ching"
-date: "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
-output: ioslides_presentation
+title       : Introduction to Data Science
+subtitle    : Statistical Learning
+author      : Craig Ching
+date        : "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      #
+widgets     : [mathjax, quiz, bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
 ---
 
+<style>
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+}
+slide:not(.segue) h2 {
+  color: #800000
+}
+slide pre code {
+  font-size: 11px ;
+}
+slide.linkage li {
+  font-size: 80%;
+}
+slide.eighty li {
+  font-size: 80%;
+}
+img[alt=true_function] {
+  height: 400px;
+}
+img[alt=linear_model] {
+  height: 400px;
+}
+img[alt=true_function] {
+  height: 400px;
+}
+img[alt=smooth_thin_plate_spline_fit] {
+  height: 400px;
+}
+img[alt=accuracy_vs_interpretability] {
+  height: 400px;
+}
+img[alt=knn] {
+  height: 400px;
+}
+img[alt=knn_10] {
+  height: 400px;
+}
+img[alt=knn_1_and_100] {
+  height: 400px;
+}
+img[alt=fig_2_9] {
+  height: 400px;
+}
+img[alt=fig_2_10] {
+  height: 400px;
+}
+img[alt=fig_2_11] {
+  height: 400px;
+}
+</style>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## What is Statistical Learning?
@@ -20,18 +77,21 @@ $Y = f(X) + \epsilon$
 
 Statistical learning is a set of approaches for estimating $f$
 
+---
 ## Estimating $f$
 
 * Why?
     + Prediction
     + Inference
-    
+
+---
 ## Prediction
 
 $\hat{Y} = \hat{f}(X)$
 
 * For prediction $\hat{f}$ may be considered a black box, provided that it yields accurate predictions for $Y$
 
+---
 ## Prediction - Error
 
 $E(Y - \hat{Y})^2 = [f(X) - \hat{f}(X)]^2 + Var(\epsilon)$
@@ -44,6 +104,7 @@ $E(Y - \hat{Y})^2 = [f(X) - \hat{f}(X)]^2 + Var(\epsilon)$
     
 "The focus of this book is on techniques for estimating f with the aim of minimizing the reducible error"
 
+---
 ## Inference
 
 * Want to understand the relationship between $X$ and $Y$
@@ -55,6 +116,7 @@ $E(Y - \hat{Y})^2 = [f(X) - \hat{f}(X)]^2 + Var(\epsilon)$
 
 Sometimes the goal is prediction, sometimes it's inference and sometimes it's a combination of the two
 
+---
 ## Estimating $f$
 
 * How?
@@ -63,39 +125,40 @@ Sometimes the goal is prediction, sometimes it's inference and sometimes it's a 
 
 What are the advantages and disadvantages of each?
 
-* Parametric models will not usually match the true form of $f$
+* Parametric models reduce the problem of estimating $f$ down to estimating a set of parameters
+  + Linear models, $Y \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p$
 * Non-parameteric models do not reduce the problem of estimating $f$ to a small number of parameters and, thus, require far more observations for an accurate estimate of $f$
 
+---
 ## True Model
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/true-function.png")
-```
+![true_function](./images/true-function.png)
 
 Figure 2.3 in the book represents the *true* model of the data.
 
+---
 ## Parametric Model
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/linear-model.png")
-```
+![linear_model](./images/linear-model.png)
 
 Figure 2.4 is a linear model of the data which represents a parametric approach.
 
+---
 ## Non-Parametric Model
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/smooth-thin-plate-spline-fit.png")
-```
+![smooth_thin_plate_spline_fit](./images/smooth-thin-plate-spline-fit.png)
+
 
 Figure 2.5 shows a smooth thin-plate spline model of the data which represents a non-parametric approach.
+  + Notice the increased variability in the fit compared to the true model!
 
+---
 ## Prediction Accuracy vs. Interpretability
 
-```{r, out.width = 800, fig.retina = NULL}
-knitr::include_graphics("images/accuracy-vs-interpretability.png")
-```
+![accuracy_vs_interpretability](./images/accuracy-vs-interpretability.png)
 
+
+---
 ## Supervised vs. Unsupervised Learning
 
 * Supervised Learning
@@ -108,6 +171,7 @@ knitr::include_graphics("images/accuracy-vs-interpretability.png")
 * Semi-supervised Learning
 	+ May be some criteria within the data that allows a supervised method if defined
 
+---
 ## Regression vs. Classification
 
 * Problems where we want to predict quantitative responses are referred to as *regression* problems
@@ -115,6 +179,7 @@ knitr::include_graphics("images/accuracy-vs-interpretability.png")
 
 Choose based on the type of the *response* variable, the *predictors* are generally considered less important and can work with most learning methods regardless of the predictor variable type provided that any qualitative predictors are properly *coded* before any analysis is performed
 
+---
 ## Assessing Model Accuracy
 
 * Why so many methods?
@@ -122,6 +187,7 @@ Choose based on the type of the *response* variable, the *predictors* are genera
 
 Must decide which method performs the best for any given data set
 
+---
 ## Measuring Quality of Fit
 
 For regression:
@@ -136,12 +202,29 @@ $MSE = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{f}(x_i))^2$
 * Later chapters describe techniques to overcome these limitations, for instance, cross-validation
 * Review Figures 2.9, 2.10 and 2.11
 
+---
+## Figure 2.9
+
+![fig_2_9](images/2.9.png)
+
+---
+## Figure 2.10
+
+![fig_2_10](images/2.10.png)
+
+---
+## Figure 2.11
+
+![fig_2_11](images/2.11.png)
+
+---
 ##  Overfitting
 
 * When a given method yields a small training MSE, but a large test MSE
 * "When we overfit the training data, the test MSE will be very large because the supposed patterns that the method found in the training data simply don't exist in the test data"
 * Note that we do expect the training MSE to be smaller than the test MSE because most learning methods either directly or indirectly seek to minimize the MSE
 
+---
 ## Bias Variance Trade-off
 
 $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_o)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon)$
@@ -155,6 +238,7 @@ $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_o)) + [Bias(\hat{f}(x_0))]^2 + Var(\eps
 
 As a general rule, as we use more flexible methods, the variance will increase and the bias will decrease
 
+---
 ## Classification
 
 * Most concepts from regression apply to classification with some modifications due to the fact that $y_i$ is no longer numerical (it is categorical)
@@ -168,6 +252,7 @@ $Ave(I(y_0 \neq \hat{y_0}))$
 
 * A *good* classifier is one for which the test error is smallest
 
+---
 ## The Bayes Classifier
 
 * The Bayes classifier:
@@ -183,30 +268,27 @@ $1 - E(max_j Pr(Y = j|X))$
 * Analogous to the irreducible error in regression
 * Used as a benchmark in classification
 
+---
 ## K Nearest Neighbors
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/knn-algorithm.png")
-```
+![knn](./images/knn-algorithm.png)
 
 * Classify based on K nearest neighbors
 * KNN decison boundary
 
+---
 ## K Nearest Neighbors
 
-* K == 10, compares favorable with the Bayes decision boundary
+* K == 10, compares favorably with the Bayes decision boundary
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/knn-10.png")
-```
+![knn_10](./images/knn-10.png)
 
+---
 ## K Nearest Neighbors
 
 * K == 1 and K == 100
 
-```{r, out.width = 400, fig.retina = NULL}
-knitr::include_graphics("images/knn-1-and-100.png")
-```
+![knn_1_and_100](./images/knn-1-and-100.png)
 
 * K == 1, overfit, overly flexible
 * K == 100, almost linear, not sufficiently flexible
