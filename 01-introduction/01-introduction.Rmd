@@ -1,22 +1,72 @@
 ---
-title: "01-Data Science Introduction"
-author: "Craig Ching"
-date: "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
-output: ioslides_presentation
-css: css/intro.css
+title       : Introduction to Data Science
+subtitle    : An Overview of Statistical Learning
+author      : Craig Ching
+date        : "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      #
+widgets     : [mathjax, quiz, bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
 ---
 
+<style>
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+}
+slide:not(.segue) h2 {
+  color: #800000
+}
+slide pre code {
+  font-size: 11px ;
+}
+slide.linkage li {
+  font-size: 80%;
+}
+slide.eighty li {
+  font-size: 80%;
+}
+img[alt=book_islr] {
+  height: 400px;
+}
+img[alt=book_eslr] {
+  height: 400px;
+}
+img[alt=book_data_computing] {
+  height: 300px;
+}
+img[alt=book_r_in_action] {
+  height: 300px;
+}
+img[alt=python_machine_learning] {
+  height: 400px;
+}
+</style>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Books {#covers}
+## Scope
 
-```{r, out.width = 300, fig.retina = NULL}
-knitr::include_graphics("images/ISL Cover 2.jpg")
-knitr::include_graphics("images/CoverII_small.jpg")
-```
+* Machine Learning Theory (light!)
+* Understand when to use different algorithms
+* Focus on traditional machine learning to begin with
+  + Build up for understanding deep learning theory
+* Learn how to implement machine learning algorithms
+* Open ended, consider contributing!
 
+--- &twocol .eighty
+## R Books
+
+*** =left
+![book_islr](./images/ISL Cover 2.jpg)
+
+*** =right
+![book_eslr](./images/CoverII_small.jpg)
+
+---
 ## Books
 
 * An Introduction to Statistical Learning with Applications in R (ISLR)
@@ -27,7 +77,8 @@ knitr::include_graphics("images/CoverII_small.jpg")
     + Provides the theory
     + We may use this for some deeper dives
     + Available at http://statweb.stanford.edu/~tibs/ElemStatLearn/
-    
+
+---    
 ## Getting and Using R
 
 * Download and install R
@@ -35,6 +86,7 @@ knitr::include_graphics("images/CoverII_small.jpg")
 * Download and install RStudio
     + https://www.rstudio.com/products/rstudio/download/
 
+---    
 ## Why R?
 
 * Because ISLR!
@@ -43,6 +95,7 @@ knitr::include_graphics("images/CoverII_small.jpg")
 * Concepts can be *directly* applied to other environments, particularly Python
 * We're all programmers and my experience tells me you won't have a problem with learning R!
 
+---    
 ## Modern R
 
 * Hadley Wickham, "The Hadleyverse"
@@ -50,25 +103,45 @@ knitr::include_graphics("images/CoverII_small.jpg")
     + dplyr
     + tidyr
 
+---    
 ## Learning R
 
 * Data Computing
     + http://data-computing.org
 * Covers modern R!
 
-```{r, out.width = 300, fig.retina = NULL}
-knitr::include_graphics("images/front-cover.png")
-```
+![book_data_computing](./images/front-cover.png)
 
+---    
 ## Learning R
 
 * R in Action
     + https://www.manning.com/books/r-in-action-second-edition
 
-```{r, out.width = 300, fig.retina = NULL}
-knitr::include_graphics("images/RinActionCover.jpg")
-```
+![book_r_in_action](./images/RinActionCover.jpg)
 
+---
+## Python Books
+
+![python_machine_learning](images/python_machine_learning.png)
+
+---
+## Python Frameworks
+
+* Scikit-learn, SciPy, NumPy
+* Pandas
+* Matplotlib, Seaborn
+* TensorFlow, PyTorch
+
+---
+## Jupyter
+
+* Web-based interactive notebooks
+* Create reproducible experiements and tutorials
+* "Share" them with others
+* We'll have a JupyterHub service so you don't have to install and maintain Jupyter yourself
+
+---    
 ## Goals of the Data Science Meetup
 
 * Have fun!
@@ -76,23 +149,24 @@ knitr::include_graphics("images/RinActionCover.jpg")
 * Learn about the topic of machine learning
 * ISLR is not the end
 
+---    
 ## Structure of the Data Science Meetup
 
 * Structured sessions
     + Interaction encouraged
-* Presentations availble on BMC github
-    + Available on BMC github https://github.bmc.com/cching/bmc-datascience
+* Presentations availble on public github
+    + At https://github.com/craigching/datascience-course
 * Regular sessions and will be recorded
 * Labs
     + Volunteer to present?
 * Open ended
 
+---    
 ## Introduction to Statistical Learning
 
-```{r, out.width = 600, fig.retina = NULL}
-knitr::include_graphics("images/plots.png")
-```
+![width](./images/plots.png)
 
+---    
 ## Exploring Data
 
 * Quantitative/continuous values
@@ -103,6 +177,7 @@ knitr::include_graphics("images/plots.png")
     + Stock movement (up, down)
     + Low, medium, high (ordered categorical)
 
+---    
 ## History of Statistical Learning
 
 * Method of Least Squares
@@ -118,6 +193,7 @@ knitr::include_graphics("images/plots.png")
 * Generalized Linear Models
     + Nelder and Wedderburn, early 1970's
 
+---    
 ## ISLR Premises
 
 * Many statistical learning methods are relevant and useful in a wide
