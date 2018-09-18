@@ -292,3 +292,49 @@ $1 - E(max_j Pr(Y = j|X))$
 
 * K == 1, overfit, overly flexible
 * K == 100, almost linear, not sufficiently flexible
+
+---
+## Pop Quiz!
+
+Adam said he wants this as feedback for your performance review! (I'm making that up)
+
+--- &radio
+
+## Parametric vs. Non-Parametric
+
+Is KNN a parametric or a non-parametric algorithm?
+
+1. Parametric
+2. _Non-Parametric_
+
+*** .explanation
+
+KNN is a non-parametric algorithm.  The "fit" process does nothing, during prediction, the given point on which to predict is simply compared to the nearest neighbors in the dataset.  Non-parametric algorithms are sometimes called "lazy" for this reason and they can be memory hungry due to having to keep all the data around to perform predictions.
+
+--- &radio
+
+## Mean Squared Error
+
+MSE seems like it exaggerates the predictions that are wrong.  Is this a feature or a bug?
+
+1. _Feature_
+2. Bug
+
+*** .explanation
+
+It is a feature when used appropriately.  Note that in neural networks and deep learning, such errors can have a negative effect on learning performance and other means are employed to keep the error from growing too high in the presence of mis-predictions.
+
+--- &radio
+
+## Bias-Variance Tradeoff vs. Overfitting
+
+I first tried a linear model and both my training error and test error were bad.  I then tried a smoothing spline, but, this time I nailed my training error, but my test error was still bad.  What problem am I facing?
+
+1. Bias-Variance Tradeoff
+2. Overfitting
+3. _Both_
+4. Something else
+
+*** .explanation
+
+This is the situation in figure 2.9.  The linear model suffered from bias, the true function was not linear, so neither the training error nor the test error were good.  The high degree spline model suffered from overfitting on the training data, but poor performance on test data.  The right model to use is something that doesn't fit the training set quite as well so that it can generalize to unseen data better.
