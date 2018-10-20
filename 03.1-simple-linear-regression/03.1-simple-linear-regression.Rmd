@@ -1,12 +1,45 @@
 ---
-title: "03.1 Simple Linear Regression"
-author: "Craig Ching"
-date: "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
-output: ioslides_presentation
+title       : Linear Regression
+subtitle    : Simple Linear Regression
+author      : Craig Ching
+date        : "`r as.character(format(Sys.Date(), format='%B %d, %Y'))`"
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      #
+widgets     : [mathjax, quiz, bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
 ---
 
+<style>
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+}
+slide:not(.segue) h2 {
+  color: #800000
+}
+slide pre code {
+  font-size: 11px ;
+}
+slide.linkage li {
+  font-size: 80%;
+}
+slide.eighty li {
+  font-size: 80%;
+}
+img[alt=least_squares_minimization] {
+  height: 400px;
+}
+img[alt=least_squares] {
+  height: 400px;
+}
+img[alt=pop_regression_line] {
+  height: 300px;
+}
+</style>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Recap
@@ -17,6 +50,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * Assessing Model Accuracy
 * Overfitting and Bias-Variance Tradeoff
 
+---
 ## Bias Variance Trade-off
 
 $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_o)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon)$
@@ -30,12 +64,14 @@ $E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_o)) + [Bias(\hat{f}(x_0))]^2 + Var(\eps
 
 As a general rule, as we use more flexible methods, the variance will increase and the bias will decrease
 
+---
 ## Linear Regression
 
 * Simple approach to supervised learning
 
 "... the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated."
 
+---
 ## Important Questions
 
 Recalling the Advertising data from Chapter 2:
@@ -48,6 +84,7 @@ Recalling the Advertising data from Chapter 2:
 6. Is the relationship linear?
 7. Is there synergy among the advertising media?
 
+---
 ## Simple Linear Regression
 
 * Predict quantitative responses from a single predictor variable
@@ -64,11 +101,13 @@ $\hat{y} = \hat{\beta_0} + \hat{\beta_1}x$
 
 can be used for prediction
 
+---
 ## Estimating the Coefficients
 
 * Amounts to finding a line of *best fit*
 * Use the data to *train* a *model*
 
+---
 ## Least Squares
 
 * Residuals
@@ -85,36 +124,35 @@ $\hat{\beta_1} = \frac{\sum_{i = 1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i =
 
 $\hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x_i}$
 
+---
 ## Least Squares Minimization
 
-```{r, out.width = 800, fig.retina = NULL}
-knitr::include_graphics("images/least-squares-minimization.png")
-```
+![least_squares_minimization](./images/least-squares-minimization.png)
 
+---
 ## Linear Regression for Advertising Data
 
 * $sales \approx 7.03 + 0.0475TV$
 * Interpretation: "An additional $1,000 spent on TV advertising is associated with selling approximately 47.5 additional units of the product."
 
+---
 ## Least Squares Illustrated
 
-```{r, out.width = 600, fig.retina = NULL}
-knitr::include_graphics("images/least-squares.png")
-```
+![least_squares](./images/least-squares.png)
 
 $\hat{y} = 7.03 + 0.0475x$
 
+---
 ## The Population Regression Line
 
-```{r, out.width = '400', fig.retina = NULL}
-knitr::include_graphics("./images/pop-regression-line.png")
-```
+![pop_regression_line](./images/pop-regression-line.png)
 
 True model based on $f(X) = 2 + 3X$, red line represents true relationship, dark blue line is the least squares estimate, light blue lines are least squares lines from different data sets
 
 * Least squares lines are, on average, close to the population regression line
 * Example of Variance in "Bias Variance Tradeoff"
 
+---
 ## Assessing Accuracy of the Coefficient Estimates
 
 * Average amount that the coefficients $\hat{\beta_0}$ and $\hat{\beta_1}$ differ from the true coefficients $\beta_0$ and $\beta_1$
@@ -127,6 +165,7 @@ $SE(\hat{\beta_0})^2 = \sigma^2\Big[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i = 1}^
 
 $SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i = 1}^{n}(x_i - \bar{x})^2}$
 
+---
 ## Confidence Intervals for Coefficient Estimates
 
 $\beta_1 \pm 2 * SE(\hat{\beta_1})$
@@ -137,6 +176,7 @@ $[\hat{\beta_1} - 2 * SE(\hat{\beta_1}), \hat{\beta_1} + 2 * SE(\hat{\beta_1})]$
 
 "In the case of the advertising data, the 95% confidence interval for $\beta_0$ is [6.130, 7.935] and the 95% confidence interval for $\beta_1$ is [0.042, 0.053]. Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,940 units. Furthermore, for each $1,000 increase in television advertising, there will be an average increase in sales of between 42 and 53 units."
 
+---
 ## Hypothesis Tests for Cofficient Estimates
 
 $H_0 :$ There is no relationship between $X$ and $Y$
@@ -149,6 +189,7 @@ $H_0 : \beta_1 = 0$
 
 $H_a : \beta_1 \neq 0$
 
+---
 ## The *t* Statistic for the Coefficient Estimates
 
 * Measures the number of standard deviations that $\hat{\beta_1}$ is away from 0
@@ -156,6 +197,7 @@ $H_a : \beta_1 \neq 0$
 
 $t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})}$
 
+---
 ## Assessing Model Accuracy
 
 * Residual Standard Error (RSE)
@@ -169,6 +211,7 @@ $t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})}$
     + Squared correlation and the $R^2$ statistic are identical
     + $R^2$ is better than correlation in multiple linear regression
 
+---
 ## RSE and $R^2$ Computations
 
 $RSE = \sqrt{\frac{1}{n - 2} RSS}$
@@ -183,6 +226,7 @@ $TSS = \sum_(y_i - \bar{y})^2$
 * RSS is *residual sum of squares*
 * TSS is *total sum of squares*
 
+---
 ## R Demonstration
 
 * Advertising data set
