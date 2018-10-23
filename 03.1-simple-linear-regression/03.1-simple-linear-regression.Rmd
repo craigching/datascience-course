@@ -39,6 +39,9 @@ img[alt=least_squares] {
 img[alt=pop_regression_line] {
   height: 300px;
 }
+img[alt=least_squares_quiz] {
+  height: 200px;
+}
 </style>
 
 ```{r setup, include=FALSE}
@@ -105,6 +108,13 @@ can be used for prediction
 ---
 ## Estimating the Coefficients
 
+* In practice, $\beta_0$ and $\beta_1$ are unknown, so we use the data to estimate the coefficients
+* Given a data set:
+
+$(x_1, y_1), (x_2, y_2) \dots (x_n, y_n)$
+
+* Our goal is to find coefficient estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ such that the linear model fits the data well
+
 * Amounts to finding a line of *best fit*
 * Use the data to *train* a *model*
 
@@ -113,11 +123,15 @@ can be used for prediction
 
 * Residuals
 
-$\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ is our prediction for $Y$ based on the *i*th value of $X$.  Then $e_i = y_i - \hat{y_i}$ is the *i*th *residual*
+$\hat{y_i} = \hat{\beta_0} + \hat{\beta_1}x_i$ is our prediction for $Y$ based on the $i$th value of $X$.  Then $e_i = y_i - \hat{y_i}$ is the $i$th *residual*
 
 * Residual Sum of Squares (RSS)
 
 $RSS = e_1^2 + e_2^2 + ... + e_n^2$
+
+* Equivalently
+
+$RSS = (y_1 - \hat{\beta_0} - \hat{\beta_1}x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1}x_2)^2 + \dots (y_n - \hat{\beta_0} - \hat{\beta_1}x_n)^2$
 
 * Choose $\beta_0$ and $\beta_1$ to minimize RSS
 
@@ -180,6 +194,8 @@ $[\hat{\beta_1} - 2 * SE(\hat{\beta_1}), \hat{\beta_1} + 2 * SE(\hat{\beta_1})]$
 ---
 ## Hypothesis Tests for Cofficient Estimates
 
+* Standard errors can also be used to perform hypothesis tests on the coefficients
+
 $H_0 :$ There is no relationship between $X$ and $Y$
 
 $H_a :$ There is some relationship between $X$ and $Y$
@@ -198,8 +214,12 @@ $H_a : \beta_1 \neq 0$
 
 $t = \frac{\hat{\beta_1} - 0}{SE(\hat{\beta_1})}$
 
+![lm_model](./images/lm-model.png)
+
 ---
 ## Assessing Model Accuracy
+
+* Once we've rejected the null hypothesis in favor of the alternative hypothesis, we want to quantify how well the model fits the data.
 
 * Residual Standard Error (RSE)
     + Estimates the standard deviation of $\epsilon$
@@ -228,7 +248,49 @@ $TSS = \sum_(y_i - \bar{y})^2$
 * TSS is *total sum of squares*
 
 ---
-## R Demonstration
+## Pop Quiz!
 
-* Advertising data set
-* mtcars data set
+--- &radio
+
+## Did you notice?
+
+When determining the accuracy of coefficient estimates, the following was assumed:
+
+* Assume errors $\epsilon_i$ for each observation are uncorrelated with common variance $\sigma^2$ (Not true in figure 3.1!)
+
+![least_squares_quiz](./images/least-squares.png)
+
+What is the problem being pointed out here?
+
+1. The population model may be non-linear (due to the lower left hand side)
+2. _As the predictor value increases, the spread of the response is more spread out_
+
+*** .explanation
+
+Both of these are problems with the model chosen for the dataset.  The particular problem that this question is pointing out is that as X gets bigger, there is more spread in the Y values.  This is known as **heteroscedasticity** and violates the assumption made in this example.
+
+--- &radio
+
+## Y-Intercept
+
+In the following model, how do we interpet $\beta_0$?
+
+$Y \approx \beta_0 + \beta_1X$
+
+1. _$\beta_0$ is the predicted value when $X$ is 0_
+2. $\beta_0$ is afraid of $\alpha_0$
+3. There is nothing special about $\beta_0$, it's just a number
+
+--- &radio
+
+## Linear Model Assumption (bias)
+
+Is a linear model a good model for $Sales$ ~ $TV$?
+
+![least_squares_quiz](./images/least-squares.png)
+
+1. _No_
+2. Yes
+3. Maybe
+
+Why or why not?
